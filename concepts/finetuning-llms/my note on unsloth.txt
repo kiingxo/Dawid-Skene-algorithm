@@ -1,0 +1,110 @@
+🗓️ Saturday 26th July
+------------------------
+
+Topic: Revisiting Introduction to Fine-Tuning
+------------------------------------------------
+
+What is Fine-Tuning?
+-------------------------
+Fine-tuning an LLM customizes its behavior, enhances and injects new knowledge, and optimizes performance for specific domains or tasks.
+
+
+Fine-Tuning vs Pre-Training
+----------------------------
+
+Pre-Training Analogy
+---------------------
+Like teaching a child everything about the world — language, math, science, history — from scratch.
+
+Fine-Tuning Analogy
+--------------------
+Like teaching that same child how to do one job really well — e.g., become a lawyer, doctor, or customer support agent.
+
+
+Common Fine-Tuning Methods
+------------------------------
+
+	•	SFT (Supervised Fine-Tuning) — Task-specific labeled data
+	•	LoRA / QLoRA — Low-rank adaptation, lightweight fine-tuning
+	•	PEFT — Parameter-Efficient Fine-Tuning (only updates a small subset of model weights)
+	•	Instruction Fine-Tuning — Teaches models to better follow human-written instructions
+
+When Should You Fine-Tune?
+------------------------------------
+	•	You have domain-specific data (e.g. medical, legal, financial)
+	•	You want better performance than prompting can give
+	•	You plan to deploy models offline
+	•	You need custom behavior (e.g., specific tone, formatting, task alignment)
+
+If you don’t have labeled data or just want better responses:
+	•	Prompt engineering — Improve your prompts, not the model
+	•	RAG (Retrieval-Augmented Generation) — Feed external knowledge in real time
+	•	Embeddings + vector search — Inject relevant context at inference time
+
+
+
+
+LoRA or QLoRA
+--------------
+
+Both are techniques used to fine-tune large language models efficiently, without updating the entire model (which would be expensive and slow).
+
+
+LoRA (Low-Rank Adaptation)
+---------------------------
+Fine-tunes just a few small matrices inside the model instead of the whole thing.
+
+
+	•	Saves time and memory
+	•	Uses 16-bit precision (fp16/bf16)  (still pretty fast)
+	•	Good for small-to-medium models
+	•	Can be run on consumer GPUs (like 12–24 GB VRAM....hard it works fine with colab too)
+
+
+
+ QLoRA (Quantized LoRA)
+ ---------------------
+ Takes LoRA and adds 4-bit quantization, making the model even smaller and lighter to train.
+	•	Great for very large models (like 33B, 70B, etc.)
+	•	Even more memory efficient than LoRA
+	•	Can run massive models on smaller GPUs (like 1x A100 or even consumer GPUs with ~24 GB)
+	•	But: it’s a bit trickier to set up, especially for beginners
+
+
+
+Will be starting with Llama 3.1 (8B)
+------------------------------------
+ill explain what parameters are 
+	•	“8B” = 8 billion parameters
+→ A parameter is like a “dial” in the model that adjusts how it understands language.
+→ More parameters = more knowledge and reasoning capacity (but also more compute/memory needed).
+
+
+
+Parameter vs modal size
+
+Precision        Storage per parameter       Model size for 8B params
+32-bit float       4 bytes                   8B × 4 = ~32 GB
+16-bit float	   2 bytes                   8B × 2 = ~16 GB
+4-bit Quantized	   0.5 bytes                 8B × 0.5 = ~4 GB
+
+
+
+Choosing the Right Model for Fine-Tuning
+-------------------------------------------
+
+1. Match Model to Use Case
+	•	Vision tasks → Use LLaMA 3.2 Vision
+	•	Code tasks → Use Qwen Coder 2.5
+	•	Always align model type with your dataset/task.
+
+2. Check Licensing & Requirements
+	•	Ensure compatibility with your system.
+	•	Review VRAM and compute requirements using provided guidelines.
+
+3. Evaluate Resources
+	•	Choose a model size that fits your VRAM, dataset size, and training budget.
+	•	Larger models need more storage and compute.
+
+4. Select the Model Version
+	•	Prefer the latest model for best performance.
