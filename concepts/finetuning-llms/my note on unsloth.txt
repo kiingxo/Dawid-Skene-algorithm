@@ -108,3 +108,48 @@ Choosing the Right Model for Fine-Tuning
 
 4. Select the Model Version
 	•	Prefer the latest model for best performance.
+
+
+Dataset Guide for Fine-Tuning
+
+What is a Dataset?
+	•	A dataset is a collection of text data used to fine-tune or pretrain LLMs.
+	•	Text must be tokenizable to be useful — tokens are turned into embeddings the model learns from.
+
+Key Concepts
+	•	Chat Template: Defines how your data is structured (chat, instructions, etc.).
+	•	Tokenization: Converts text into tokens (subwords, words, characters) for model processing.
+
+
+Dataset Design Steps
+	1.	Define Purpose – What are you training the model to do? (e.g. Q&A, summarization, roleplay)
+	2.	Choose Output Style – What should the model generate? (text, JSON, code, language)
+	3.	Pick Data Source – Use CSVs, PDFs, websites, or Hugging Face datasets (e.g. ShareGPT).
+→ You can also generate synthetic data, but it must be high quality.
+
+ Common Data Formats
+	•	Raw Text Format (for CPT):
+	"text": "Pasta carbonara is a traditional Roman pasta dish..."
+
+	• Instruction Format (Alpaca style):
+			{
+		"instruction": "Summarize this text.",
+		"input": "Carbonara is made from...",
+		"output": "It's a Roman pasta dish made with..."
+		}
+
+    •	Conversation Format (ShareGPT style):
+				{
+			"conversations": [
+				{"from": "human", "value": "Help me make carbonara"},
+				{"from": "gpt", "value": "Do you want the traditional recipe?"}
+			]
+			}
+
+ 	•	ChatML Format (OpenAI / Hugging Face default):
+			{
+  "messages": [
+    {"role": "user", "content": "What is 1+1?"},
+    {"role": "assistant", "content": "It's 2!"}
+  ]
+}
